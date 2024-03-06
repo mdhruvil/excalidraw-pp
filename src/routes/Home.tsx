@@ -11,7 +11,10 @@ function Home() {
     <div>
       <nav className="border-b p-3">
         <div className="container flex justify-between">
+
+
           <p className="text-2xl font-bold">Excalidraw++</p>
+
           <CreateFileDialog>
             <Button>
               <PlusIcon className="mr-2 size-4" />
@@ -25,18 +28,18 @@ function Home() {
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5">
           {files
             ? files.map((file, i) => {
-                if (!file.id) {
-                  return;
-                }
-                return (
-                  <FileTile
-                    key={i}
-                    name={file.name}
-                    id={file.id}
-                    createdAt={file.createdAt}
-                  />
-                );
-              })
+              if (!file.id) {
+                return;
+              }
+              return (
+                <FileTile
+                  key={i}
+                  name={file.name}
+                  id={file.id}
+                  createdAt={file.createdAt}
+                />
+              );
+            })
             : "Loading..."}
         </div>
       </div>
