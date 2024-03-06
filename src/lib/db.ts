@@ -10,7 +10,6 @@ export interface File {
 }
 // Here More types will be added in future
 export type FileType = {
-  type: "excalidraw";
   elements: ExcalidrawElement[];
   appState: AppState;
   files: BinaryFiles;

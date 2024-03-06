@@ -39,6 +39,20 @@ function FileTile({ name, id, createdAt }: Props) {
   async function deleteFile() {
     await db.files.delete(id);
   }
+
+  async function duplicateFile() {
+    const file = await db.files.where({ id }).first();
+    if (!file) return;
+    await db.files.add({
+      name: `${file?.name} - copy`,
+      createdAt: new Date(),
+      data: file.data && {
+        elements: file.data.elements,
+        appState: file.data.appState,
+        files: file.data.files,
+      },
+    });
+  }
   return (
     <div className="group w-auto rounded-lg border border-transparent p-2 transition-all duration-200 hover:border-primary-foreground hover:shadow-md">
       <Link to={`/files/${id}`}>
@@ -80,7 +94,7 @@ function FileTile({ name, id, createdAt }: Props) {
                   <DrawingPinIcon className="mr-2 size-4" />
                   Pin
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem onClick={duplicateFile}>
                   <CopyIcon className="mr-2 size-4" />
                   Duplicate
                 </DropdownMenuItem>
